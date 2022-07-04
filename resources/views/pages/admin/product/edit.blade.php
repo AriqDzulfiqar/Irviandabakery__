@@ -79,6 +79,12 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="col-md-12">
+                                                <label>Stock Produk</label>
+                                                <input type="number" name="stock" class="form-control" value="{{$item->stock}}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
                                                 <label>Deskripsi Produk</label>
                                                 <textarea name="description" id="editor">{!! $item->description !!}</textarea>
                                             </div>

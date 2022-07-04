@@ -24,9 +24,11 @@ class ProductController extends Controller
     {
         if(request()->ajax())
         {
-            $query = Product::with(['user','category']);
+            $query = Product::with(['user','category'])->latest()->get();
 
             return Datatables::of($query)
+                ->addIndexColumn()
+
                 ->addColumn('action', function($item) {
                     return'
                     <div class="btn-group">
@@ -40,6 +42,7 @@ class ProductController extends Controller
                                 <a class="dropdown-item" href="' .route('product.edit', $item->id). '">
                                 Sunting
                                 </a>
+                                
                                 <form action="'. route('product.destroy', $item->id) .'" method="POST">
                                     '.method_field('delete').csrf_field(). '
                                     <button type="submit" class="dropdown-item text-danger">
@@ -50,6 +53,9 @@ class ProductController extends Controller
                         </div>
                     </div>
                     ';
+                })
+                ->editColumn('price', function($item) {
+                    return number_format($item->price,0,',','.');
                 })
                 ->rawColumns(['action'])
                 ->make();
@@ -88,7 +94,7 @@ class ProductController extends Controller
         
         Product::create($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -138,7 +144,7 @@ class ProductController extends Controller
 
         $item->update($data);
        
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Produk berhasil diupdate');
     }
 
     /**

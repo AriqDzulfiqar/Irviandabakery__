@@ -73,6 +73,12 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="col-md-12">
+                                                <label>Stock Produk</label>
+                                                <input type="number" name="stock" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
                                                 <label>Deskripsi Produk</label>
                                                 <textarea name="description" id="editor"></textarea>
                                             </div>

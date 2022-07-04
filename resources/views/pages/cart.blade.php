@@ -48,7 +48,7 @@
                   @foreach ($carts as $cart)
                     <tr>
                       <td style="width: 20%;">
-                        @if($cart->product->galleries)
+                        @if($cart->product->galleries->count() > 0)
                           <img
                             src="{{ Storage::url($cart->product->galleries->first()->photos) }}"
                             alt=""
