@@ -88,10 +88,12 @@
               <h2 class="mb-4">Detail Pengiriman</h2>
             </div>
           </div>
-          <form action="{{route('checkout')}}" enctype="multipart/form-data" method="POST">
+          <form action="{{route('checkout')}}" enctype="multipart/form-data" method="POST" id="locations">
           @csrf            
-            <input type="hidden" name="total_price" value="{{ $totalPrice }}">
-            <div class="row mb-2" data-aos="fade-up" data-aos-delay="200" id="locations">
+            <input type="hidden"  id="price" value="{{ $totalPrice }}">
+            <input type="hidden" name="total_price" id="total_price"  value="{{ $totalPrice }}">
+            <input type="hidden" name="ongkir"  v-model="ongkir">
+            <div class="row mb-2" data-aos="fade-up" data-aos-delay="200" >
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="address">Alamat</label>
@@ -187,25 +189,24 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Pilih jarak dan biaya pengiriman</label>
-                    <select   class="form-control" v-model="price_ongkir" required v-on:change="onChange($event)">
+                    <select   class="form-control" v-model="penerima" required @change="GetOngkir()">
                     <option value="">Jarak dan Biaya</option>
                     <option value="1">Dalam Kelurahan Teratai</option>
                     <option value="2">Dalam Wilayah Kecamatan Muara Bulian</option>
                     <option value="3">Diluat Kecamatan Bulian dan dalam batang hari</option>
                     <option value="4">Dan diluar itu Hubungi admin</option>
                     </select>
-                    
-
+                    <br>
+                    <label for="" v-if="penerima != 4">@{{ ongkir == 0 ? "Free Ongkir" : ongkir}}</label>
                 </div>
               </div>
-              <div class="col-md-4" v-if="input">
-                <div class="form-group">
-                  <label>Masukan Ongkir</label>
-                   <input type="text" class="form-control" name="" id="">
-                    
-
+              <template v-if="penerima == 4 ">
+                <div class="col-md-6 mb-3">
+                  <div class="product-title">Masukan Ongkos Kirim</div>
+                  <input type="text" class="form-control" v-on:keyup="InputOngkir" min="0" name="ongkir" v-model="ongkir">
                 </div>
-              </div>
+               
+              </template>
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Tambahkan catatan pembelian</label>
@@ -215,7 +216,7 @@
               </div>
 
               <div class="col-4 col-md-4">
-                <div class="product-title text-success">Rp{{ number_format($totalPrice ?? 0) }}</div>
+                <div class="product-title text-success" id="totalPembayaran">Rp{{ number_format($totalPrice ?? 0) }} </div>
                 <div class="product-subtitle">Total Harga</div>
               </div>
 
@@ -231,6 +232,7 @@
               </div>
             </div>
           </form>
+          
         </div>
       </section>
     </div>
@@ -238,44 +240,63 @@
 
 @push('addon-script')
     
-    <script src="/vendor/vue/vue.js"></script>
-    <script src="https://unpkg.com/vue-toasted"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/vendor/vue/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script>
       var locations = new Vue({
         el: "#locations",
         mounted() {
-          // AOS.init();
+          AOS.init();
           this.getProvincesData();
 
         },
       
+       
         data(){
           return{
+          penerima: null,
+          ongkir: null,
           provinces: null,
           regencies: null,
           input:null,
-          price_ongkir:4,
           provinces_id: null,
           regencies_id: null,
           }
         },
         methods: {
-          // Get Price
-          onChange(event){
-            // if(this.price_ongkir == 1){
-            //   this.price_ongkir = 0;
-            // }else if(this.price_ongkir == 2){
-            //   this.price_ongkir = 10000;
-            // }else if(this.price_ongkir == 3){
-            //   this.price_ongkir = 12500;
-            // }else if(this.price_ongkir == 4){
-            //   this.price_ongkir = 0;
-            // }
+          GetOngkir(){
             var self = this;
-            console.log(self.input);
-            console.log("tes");
-            console.log(event.target.value)
+             if(this.penerima == 1){
+              this.ongkir = 0;
+            }else if(this.penerima == 2){
+              this.ongkir = 10000;
+            }else if(this.penerima == 3){
+              this.ongkir = 12500;
+            }else if(this.penerima == 4){
+              this.ongkir = 0;
+            }
+            const price = document.getElementById('price').value ;
+            const total = parseInt(price) + parseInt(this.ongkir)
+            document.getElementById('totalPembayaran').innerHTML = `Rp ${total}`;
+            document.getElementById('total_price').value = total;
+            
+            // console.log(self.city_id)
+          },
+          InputOngkir(){
+            
+            const price = document.getElementById('price').value ;
+
+            if(this.ongkir == ""){
+              document.getElementById('totalPembayaran').innerHTML = `Rp ${parseInt(price)}`;
+            }else{
+              const total = parseInt(price) + parseInt(this.ongkir)
+
+            document.getElementById('totalPembayaran').innerHTML = `Rp ${parseInt(price) + parseInt(this.ongkir)}`;
+            document.getElementById('total_price').value = total;
+
+            }
+            // console.log(self.city_id)
           },
           getProvincesData() {
             var self = this;
@@ -301,3 +322,4 @@
       });
     </script>
 @endpush
+

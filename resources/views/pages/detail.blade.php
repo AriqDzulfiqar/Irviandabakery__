@@ -84,8 +84,8 @@
                   Stock : 
                   {{ $product->stock }}
                   <button
-                  type="submit"
-                  class="btn btn-success px-4 mt-2 text-white btn-block mb-3 {{ $product->stock == 0 ? 'disabled' : '' }}"
+                  type="submit "
+                  class="btn btn-success px-4 mt-2 text-white btn-block mb-3 " {{ $product->stock <= 0 ? 'disabled' : '' }}
                   {{ $product->stock == 0 ? 'disabled' : '' }}
                   >Masukkan ke Keranjang
                   </button>

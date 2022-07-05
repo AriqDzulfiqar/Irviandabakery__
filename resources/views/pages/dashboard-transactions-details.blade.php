@@ -52,6 +52,12 @@
                               <div class="col-12 col-md-6">
                                   <div class="product-title">Total Harga</div>
                                   <div class="product-subtitle">Rp {{number_format($transaction->transaction->total_price)}}</div>
+
+                                  <br>
+                                  <div class="product-subtitle">
+                                    Notes <br>
+                                    {{ $transaction->transaction->notes ?? "-" }}
+                                  </div>
                               </div>
                               <div class="col-12 col-md-6">
                                   <div class="product-title">Nomor Hp</div>
