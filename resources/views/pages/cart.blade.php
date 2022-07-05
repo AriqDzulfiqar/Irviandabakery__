@@ -187,18 +187,22 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Pilih jarak dan biaya pengiriman</label>
-                    <select name="price_ongkir"  class="form-control" v-model="price_ongkir" required @change="GetPrice()">
+                    <select   class="form-control" v-model="price_ongkir" required v-on:change="onChange($event)">
                     <option value="">Jarak dan Biaya</option>
                     <option value="1">Dalam Kelurahan Teratai</option>
                     <option value="2">Dalam Wilayah Kecamatan Muara Bulian</option>
                     <option value="3">Diluat Kecamatan Bulian dan dalam batang hari</option>
                     <option value="4">Dan diluar itu Hubungi admin</option>
                     </select>
-                    {{-- harga --}}
-                    {{-- 1 = free ongkir --}}
-                    {{-- 2 = 10k --}}
-                    {{-- 3 = 12.500 --}}
-                    {{-- 4 Hungi admin --}}
+                    
+
+                </div>
+              </div>
+              <div class="col-md-4" v-if="input">
+                <div class="form-group">
+                  <label>Masukan Ongkir</label>
+                   <input type="text" class="form-control" name="" id="">
+                    
 
                 </div>
               </div>
@@ -241,30 +245,37 @@
       var locations = new Vue({
         el: "#locations",
         mounted() {
-          AOS.init();
+          // AOS.init();
           this.getProvincesData();
 
         },
-        data: {
+      
+        data(){
+          return{
           provinces: null,
           regencies: null,
+          input:null,
           price_ongkir:4,
           provinces_id: null,
           regencies_id: null,
+          }
         },
         methods: {
           // Get Price
-          GetPriceOngkir(){
-            if(this.price_ongkir == 1){
-              this.price_ongkir = 0;
-            }else if(this.price_ongkir == 2){
-              this.price_ongkir = 10000;
-            }else if(this.price_ongkir == 3){
-              this.price_ongkir = 12500;
-            }else if(this.price_ongkir == 4){
-              this.price_ongkir = 0;
-            }
-            console.log(this.price_ongkir);
+          onChange(event){
+            // if(this.price_ongkir == 1){
+            //   this.price_ongkir = 0;
+            // }else if(this.price_ongkir == 2){
+            //   this.price_ongkir = 10000;
+            // }else if(this.price_ongkir == 3){
+            //   this.price_ongkir = 12500;
+            // }else if(this.price_ongkir == 4){
+            //   this.price_ongkir = 0;
+            // }
+            var self = this;
+            console.log(self.input);
+            console.log("tes");
+            console.log(event.target.value)
           },
           getProvincesData() {
             var self = this;
