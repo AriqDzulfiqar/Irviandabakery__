@@ -190,11 +190,10 @@
                 <div class="form-group">
                   <label>Pilih jarak dan biaya pengiriman</label>
                     <select   class="form-control" v-model="penerima" required @change="GetOngkir()">
-                    <option value="">Jarak dan Biaya</option>
-                    <option value="1">Dalam Kelurahan Teratai</option>
-                    <option value="2">Dalam Wilayah Kecamatan Muara Bulian</option>
-                    <option value="3">Diluat Kecamatan Bulian dan dalam batang hari</option>
-                    <option value="4">Dan diluar itu Hubungi admin</option>
+                    <option value="1">Dalam Kelurahan Teratai - Gratis</option>
+                    <option value="2">Dalam Wilayah Kecamatan Muara Bulian - Rp 10.000</option>
+                    <option value="3">Diluar Kecamatan Bulian dan dalam Kabupaten Batanghari - Rp 12.500</option>
+                    <option value="4">Dan diluar itu silahkan hubungi admin terlebih dahulu - custom</option>
                     </select>
                     <br>
                     <label for="" v-if="penerima != 4">@{{ ongkir == 0 ? "Free Ongkir" : ongkir}}</label>

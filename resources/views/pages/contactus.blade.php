@@ -26,20 +26,19 @@
 								<div class="col-lg-4">
 									<div class="contact-form-wrap">
 										<div class="contact-form-box">
-											<h4><i class="fas fa-map"></i>Alamat Toko</h4>
+											<h4>Alamat Toko</h4>
 											<p>Ruko Perum Griya AZP, Jl. Baru, Jl. Talang Inuman No.RT 24, Teratai, <br> 
 												Kec. Muara Bulian, Kabupaten Batang Hari, Jambi 36612</p>
 										</div>
 										<div class="contact-form-box">
-											<h4><i class="far fa-clock"></i>Jam Operasional</h4>
+											<h4>Jam Operasional</h4>
 											<p>Senin - Sabtu : 7 Pagi - 6 Sore </p>
 										</div>
 										<div class="contact-form-box">
-											<h4><i class="fas fa-address-book"></i>Kontak</h4>
-											<p><i class="fa-brands fa-whatsapp"></i> : 0821 7591 3770 <br> 
-											<i class="fa-brands fa-instagram"></i> : @irvianda_bakery <br>
-											<i class="fa-brands fa-facebook"></i> : Irvianda Devi</p>
-											
+											<h4>Kontak</h4>
+											Whatsapp : 0821 7591 3770 <br> 
+											Instagram : @irvianda_bakery <br>
+											Facebook : Irvianda Devi</p>
 										</div>
 									</div>
 								</div>
