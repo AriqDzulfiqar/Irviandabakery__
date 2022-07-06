@@ -43,7 +43,7 @@ class CheckoutController extends Controller
 
         foreach ($carts as $cart) {
             $trx = 'TRX-' . mt_rand(000000, 999999);
-            $product = Product::findOrFail($cart->product->id)->decrement('stock');
+            $product = Product::findOrFail($cart->products_id)->decrement('stock', $cart->quantity);
             TransactionDetail::create([
                 'transactions_id' => $transaction->id,
                 'products_id' =>  $cart->product->id,
@@ -51,6 +51,7 @@ class CheckoutController extends Controller
                 'shipping_status' =>  'PENDING',
                 'resi' => '',
                 'code' => $trx,
+                'quantity' => $cart->quantity
             ]);
         }
 
