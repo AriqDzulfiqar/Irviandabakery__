@@ -40,6 +40,7 @@
                     <td>Image</td>
                     <td>Name &amp; Seller</td>
                     <td>Price</td>
+                    <td>Quantity</td>
                     <td>Menu</td>
                   </tr>
                 </thead>
@@ -56,13 +57,17 @@
                           />
                         @endif
                       </td>
-                      <td style="width: 35%;">
+                      <td style="width: 25%;">
                         <div class="product-title">{{ $cart->product->name }}</div>
                         <div class="product-subtitle">by Irvianda Bakery</div>
                       </td>
-                      <td style="width: 35%;">
+                      <td style="width: 25%;">
                         <div class="product-title">Rp{{ number_format($cart->product->price) }}</div>
                         <div class="product-subtitle">Rupiah</div>
+                      </td>
+                      <td style="width: 15%;">
+                        <div class="product-title">{{ $cart->quantity }}</div>
+                        <div class="product-subtitle">Quantity</div>
                       </td>
                       <td style="width: 20%;">
                         <form action="{{ route('cart-delete',$cart->id) }}" method="POST">
@@ -74,7 +79,7 @@
                         </form>
                       </td>
                     </tr>
-                    @php $totalPrice += $cart->product->price @endphp
+                    @php $totalPrice += $cart->product->price * $cart->quantity @endphp
                   @endforeach
                 </tbody>
               </table>

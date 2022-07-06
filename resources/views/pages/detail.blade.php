@@ -6,10 +6,13 @@
     Store Detail Page
 @endsection
 
+@push('addon-style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+@endpush
 
 @section('content')
     <!--Page Content-->
-    <div class="page-content page-details">
+    <div class="page-content page-details" id="gallery">
       <section
         class="store-breadcrumbs"
         data-aos="fade-down"
@@ -31,7 +34,7 @@
         </div>
       </section>
 
-      <section class="store-gallery mb-3" id="gallery">
+      <section class="store-gallery mb-3" >
         <div class="container">
           <div class="row">
             <div class="col-lg-8" data-aos="zoom-in">
@@ -83,6 +86,24 @@
                   @csrf
                   Stock : 
                   {{ $product->stock }}
+
+                  <br>
+                  <br>
+                  <label for="">Quantity</label>
+                  <div class="d-flex">
+                    <button type="button" @click="GetMin()" class="btn btn-sm btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                    <input
+                      type="number"
+                      name="quantity"
+                      class="form-control"
+                      readonly
+                      min="1"
+                      max="{{ $product->stock }}"
+                      v-model="quantity"
+                    />
+                    <button type="button" @click="GetPlush()" class="btn btn-sm btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+                  </div>
                   <button
                   type="submit "
                   class="btn btn-success px-4 mt-2 text-white btn-block mb-3 " {{ $product->stock <= 0 ? 'disabled' : '' }}
@@ -128,8 +149,10 @@
         mounted() {
           AOS.init();
         },
-        data: {
+        data(){
+          return {
           activePhoto: 0,
+          quantity: 1,
           photos: [
             @foreach ($product->galleries  as $gallery)
               {
@@ -139,11 +162,23 @@
             @endforeach
             
           ],
+          }
         },
         methods: {
           changeActive(id) {
             this.activePhoto = id;
           },
+          GetMin(){
+            if(this.quantity > 1){
+              this.quantity--;
+            }
+          },
+
+          GetPlush(){
+            this.quantity += 1;
+          }
+
+          
         },
       });
     </script>
