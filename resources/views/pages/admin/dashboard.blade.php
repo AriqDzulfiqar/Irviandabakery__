@@ -159,7 +159,7 @@
                         </a>
                         @php
                        
-                          $globalTransaction += $transaction->price * $transaction->quantity + $transaction->transaction->shipping_price;
+                          $globalTransaction += ( $transaction->price * $transaction->quantity) + $transaction->transaction->shipping_price;
                         @endphp
                     @empty
                     <div class="card-body">
