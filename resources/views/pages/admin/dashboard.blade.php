@@ -62,7 +62,8 @@
                                 <img src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}" class="w-75">
                                 
                               </div>
-                              <div class="col-md-4">{{  $transaction->product->name ?? ''}}</div>
+                              <div class="col-md-3">{{  $transaction->product->name ?? ''}}</div>
+                              <div class="col-md-1">{{  $transaction->quantity?? ''}}</div>
                               <div class="col-md-3">{{  $transaction->transaction->user->name ?? ''}}</div>
                               <div class="col-md-3">{{  $transaction->created_at ?? ''}}</div>
                               <div class="col-md-1 d-none d-md-block">

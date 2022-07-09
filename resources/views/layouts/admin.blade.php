@@ -51,7 +51,12 @@
             >
               Kategori
             </a>
-            
+            <a
+              href="{{ route('transaction.index') }}"
+              class="list-group-item list-group-item-action"
+            >
+             Transakasi
+            </a>
             <a
               href="{{ route('user.index') }}"
               class="list-group-item list-group-item-action {{ (request()->is('admin/user*')) ? 'active' : ''}}"

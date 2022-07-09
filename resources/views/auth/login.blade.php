@@ -39,6 +39,12 @@
                                     </span>
                                 @enderror
                 </div>
+                
+                <div class="form-group mt-5">
+                    {!! NoCaptcha::renderJs() !!}
+                    {!! NoCaptcha::display() !!}
+                </div>
+
                 <button
                   type="submit"
                   class="btn btn-success btn-block w-75 mt-4"
