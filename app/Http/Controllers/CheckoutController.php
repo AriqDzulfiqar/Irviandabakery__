@@ -134,7 +134,7 @@ class CheckoutController extends Controller
             Mail::to($transaction->user->email)
                     ->cc('alisadikinsyahrizal@gmail.com')
                     ->send(new NotificationEmail($transaction));
-             $transaction->status = 'SUCCESS';
+             $transaction->transaction_status = 'SUCCESS';
          }
          else if($status == 'pending') {
              $transaction->transaction_status = 'PENDING';
