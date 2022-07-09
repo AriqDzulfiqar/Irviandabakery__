@@ -35,11 +35,11 @@
                             <div class="row">
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Nama Customer</div>
-                                <div class="product-subtitle">{{ $transaction->transaction->user->name }}</div>
+                                <div class="product-subtitle">{{ $transaction->transaction->user->name ?? null }}</div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Nama Produk</div>
-                                <div class="product-subtitle">{{ $transaction->product->name }}</div>
+                                <div class="product-subtitle">{{ $transaction->product->name ?? null }}</div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Tanggal Transaksi</div>
@@ -47,7 +47,7 @@
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Status Pembayaran</div>
-                                <div class="product-subtitle text-danger">{{ $transaction->transaction->transaction_status }}</div>
+                                <div class="product-subtitle text-danger">{{ $transaction->transaction->transaction_status ?? null }}</div>
                               </div>
                               <div class="col-12 col-md-6">
                                   <div class="product-title">Total Harga</div>
@@ -61,7 +61,7 @@
                               </div>
                               <div class="col-12 col-md-6">
                                   <div class="product-title">Nomor Hp</div>
-                                  <div class="product-subtitle">{{ $transaction->transaction->user->phone_number }}</div>
+                                  <div class="product-subtitle">{{ $transaction->transaction->user->phone_number ?? null }}</div>
                               </div>
                               </div>
                             </div>
@@ -76,27 +76,27 @@
                               <div class="row">
                                 <div class="col-12 col-md-6">
                                   <div class="product-title">Alamat</div>
-                                  <div class="product-subtitle">{{$transaction->transaction->user->address}}</div>
+                                  <div class="product-subtitle">{{$transaction->transaction->user->address ?? null}}</div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                   <div class="product-title">Detil Alamat</div>
-                                  <div class="product-subtitle">{{$transaction->transaction->user->detail_address}}</div>
+                                  <div class="product-subtitle">{{$transaction->transaction->user->detail_address ?? null}}</div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                   <div class="product-title">Provinsi</div>
-                                  <div class="product-subtitle">{{App\Models\Province::find($transaction->transaction->user->provinces_id)->name}}</div>
-                                </div>
+                                  <div class="product-subtitle">{{App\Models\Province::find($transaction->transaction->user->provinces_id)->name ?? null}}</div>
+                                </div> 
                                 <div class="col-12 col-md-6">
                                   <div class="product-title">Kota</div>
-                                  <div class="product-subtitle">{{App\Models\Regency::find($transaction->transaction->user->regencies_id)->name}}</div>
+                                  <div class="product-subtitle">{{App\Models\Regency::find($transaction->transaction->user->regencies_id)->name ?? null}}</div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                   <div class="product-title">Kode Pos</div>
-                                  <div class="product-subtitle">{{$transaction->transaction->user->zip_code}}</div>
+                                  <div class="product-subtitle">{{$transaction->transaction->user->zip_code ?? null}}</div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                   <div class="product-title">Negara</div>
-                                  <div class="product-subtitle">{{$transaction->transaction->user->country}}</div>
+                                  <div class="product-subtitle">{{$transaction->transaction->user->country ?? null}}</div>
                                 </div>
                                 <div class="col-12 col-md-3">
                                   <div class="product-title">Status Pengiriman</div>

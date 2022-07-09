@@ -63,12 +63,7 @@
             >
              User
             </a>
-            <a
-              href="/index.html"
-              class="list-group-item list-group-item-action"
-            >
-              Sign Out
-            </a>
+            
           </div>
         </div>
 
@@ -112,7 +107,13 @@
                     >
                     <div class="dropdown-menu">
                       
-                      <a href="/" class="dropdown-item">Logout</a>
+                      <a href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();" class="dropdown-item">Logout</a>
+                            
+                      <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none">
+                         @csrf    
+                        </form>
                     </div>
                   </li>
                   
