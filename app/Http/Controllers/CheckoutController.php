@@ -10,9 +10,9 @@ use App\Mail\NotificationEmail;
 use App\Product;
 use App\Transaction;
 use App\TransactionDetail;
-
 use Exception;
 use Illuminate\Support\Facades\Mail;
+use Midtrans\Notification;
 use Midtrans\Snap;
 use Midtrans\Config;
 
