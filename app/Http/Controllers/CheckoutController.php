@@ -131,7 +131,7 @@ class CheckoutController extends Controller
          }
  
          else if($status == 'settlement') {
-            Mail::to(Auth::user()->email)
+            Mail::to($transaction->user->email)
                     ->cc('alisadikinsyahrizal@gmail.com')
                     ->send(new NotificationEmail($transaction));
              $transaction->status = 'SUCCESS';
