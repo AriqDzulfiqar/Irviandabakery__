@@ -29,7 +29,13 @@ class DashboardController extends Controller
                  $query->whereDate('created_at', '>=', request()->start);
             })->when(request()->end, function($query){
                 $query->whereDate('created_at', '<=', request()->end);
-            })->latest();
+            })
+            ->when(request()->bulan, function($query){
+                $query->whereMonth('created_at', request()->bulan);
+            })->when(request()->tahun, function($query){
+                $query->whereYear('created_at', request()->tahun);
+            })
+            ->latest();
 
 
         return view('pages.admin.dashboard', [

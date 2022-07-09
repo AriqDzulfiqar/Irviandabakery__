@@ -22,3 +22,4 @@ Route::get('register/check', 'Auth\RegisterController@check')->name('api-registe
 Route::get('provinces', 'API\LocationController@provinces')->name('api-provinces');
 Route::get('regencies/{provinces_id}', 'API\LocationController@regencies')->name('api-regencies');
 Route::get('product/stock/{id?}','API\LocationController@stock')->name('stock-product');
+Route::post('/callback', 'CheckoutController@callback')->name('midtrans-callback');

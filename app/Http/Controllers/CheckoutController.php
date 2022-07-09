@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Cart;
+use App\Mail\NotificationEmail;
 use App\Product;
 use App\Transaction;
 use App\TransactionDetail;
 
 use Exception;
-
+use Illuminate\Support\Facades\Mail;
 use Midtrans\Snap;
 use Midtrans\Config;
 
@@ -83,6 +84,10 @@ class CheckoutController extends Controller
         ];
 
         try {
+            // Send Email
+            // Mail::to(Auth::user()->email)
+            //         ->cc('alisadikinsyahrizal@gmail.com')
+            //         ->send(new NotificationEmail($transaction));
             // Get Snap Payment Page URL
             $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
 
@@ -94,5 +99,57 @@ class CheckoutController extends Controller
     }
 
     public function callback(Request $request)
-    { }
+    {
+         // set konfigurasi midtrans
+         Config::$serverKey = config('services.midtrans.serverKey');
+         Config::$isProduction = config('services.midtrans.isProduction');
+         Config::$isSanitized = config('services.midtrans.isSanitized');
+         Config::$is3ds = config('services.midtrans.is3ds');
+ 
+         //instance midtrans notif
+         $notification = new Notification();
+ 
+         //assign ke variable untuk memuahka ke coding
+         $status = $notification->transaction_status;
+         $type = $notification->payment_type;
+         $fraud = $notification->fraud_status;
+         $order_id = $notification->order_id;
+ 
+         // cari transaksi berdasarkan id
+         $transaction = Transaction::where('code',$order_id)->first();
+ 
+         // handle notif status
+         if($status == 'capture') {
+             if($type == 'credit_card'){
+                 if($fraud == 'challenge'){
+                     $transaction->status = 'PENDING';
+                 }
+                 else{
+                     $transaction->status = 'SUCCESS';
+                 }
+             }
+         }
+ 
+         else if($status == 'settlement') {
+            Mail::to(Auth::user()->email)
+                    ->cc('alisadikinsyahrizal@gmail.com')
+                    ->send(new NotificationEmail($transaction));
+             $transaction->status = 'SUCCESS';
+         }
+         else if($status == 'pending') {
+             $transaction->status = 'PENDING';
+         }
+         else if($status == 'deny') {
+             $transaction->status = 'CANCELLED';
+         }
+         else if($status == 'expire') {
+             $transaction->status = 'CANCELLED';
+         }
+         else if($status == 'cancel') {
+             $transaction->status = 'CANCELLED';
+         }
+ 
+         //simpan transaksi 
+         $transaction->save();
+     }
 }
