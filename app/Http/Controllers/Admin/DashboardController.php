@@ -16,16 +16,15 @@ class DashboardController extends Controller
     public function index()
     {
         $customer = User::count();
-        $days = Transaction::whereDate('created_at',date('d'))->sum('total_price');
+        $days = Transaction::whereDate('created_at',date('Y-m-d'))->whereMonth('created_at',date('m'))->whereYear('created_at',date('Y'))->sum('total_price');
         $month = Transaction::whereMonth('created_at',date('m'))->sum('total_price');
         $years = Transaction::whereYear('created_at',date('Y'))->sum('total_price');
         $revenue = Transaction::sum('total_price');
         $transaction = Transaction::count();
 
         $transactions = TransactionDetail::with(['transaction.user', 'product.galleries'])
-            ->whereHas('product', function ($product) {
-                $product->where('users_id', Auth::user()->id);
-            })->when(request()->start, function($query){
+            
+            ->when(request()->start, function($query){
                  $query->whereDate('created_at', '>=', request()->start);
             })->when(request()->end, function($query){
                 $query->whereDate('created_at', '<=', request()->end);

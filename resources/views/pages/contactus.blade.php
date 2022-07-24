@@ -40,6 +40,10 @@
 											Instagram : @irvianda_bakery <br>
 											Facebook : Irvianda Devi</p>
 										</div>
+										<div class="contact-form-box">
+											<h4>Tambahan</h4>
+											<p>Informasi Halal : ID 15110000036811120<br>Informasi PIRT : 2061504020370-25</p>
+										</div>
 									</div>
 								</div>
 							</div>

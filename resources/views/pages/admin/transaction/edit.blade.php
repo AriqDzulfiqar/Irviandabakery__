@@ -53,12 +53,6 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Harga Produk</label>
-                                                <input type="number" name="price" class="form-control" value="{{$item->price}}" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
                                                 <label>Total Harga</label>
                                                 <input type="number" name="total_price" class="form-control" value="{{$item->total_price}}" required>
                                             </div>

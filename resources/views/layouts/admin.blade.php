@@ -55,7 +55,7 @@
               href="{{ route('transaction.index') }}"
               class="list-group-item list-group-item-action"
             >
-             Transakasi
+             Transaksi
             </a>
             <a
               href="{{ route('user.index') }}"

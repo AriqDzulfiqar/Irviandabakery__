@@ -84,11 +84,9 @@ class CheckoutController extends Controller
         ];
 
         try {
-            // Send Email
-            // Mail::to(Auth::user()->email)
-            //         ->cc('alisadikinsyahrizal@gmail.com')
-            //         ->send(new NotificationEmail($transaction));
-            // Get Snap Payment Page URL
+            Mail::to($transaction->user->email)
+                    ->cc('alisadikinsyahrizal@gmail.com')
+                    ->send(new NotificationEmail($transaction));
             $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
 
             // Redirect to Snap Payment Page

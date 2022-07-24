@@ -44,16 +44,7 @@
                                                 <input type="text" name="name" class="form-control" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-12">
-                                                <label>Pemilik Product</label>
-                                                <select name="users_id" class="form-control">
-                                                    @foreach ($users as $user)
-                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="col-md-12">
                                             <div class="col-md-12">
                                                 <label>Kategori Produk</label>

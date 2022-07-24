@@ -35,7 +35,7 @@
                                                     <th>ID</th>
                                                     <th>Nama</th>
                                                     <th>Foto</th>
-                                                    <th>Slug</th>
+                                                    <th>slug</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>

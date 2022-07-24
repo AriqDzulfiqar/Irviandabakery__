@@ -12,6 +12,7 @@ use App\Http\Requests\Admin\ProductRequest;
 use App\User;
 use App\Category;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -91,6 +92,8 @@ class ProductController extends Controller
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
+
+        $data['users_id'] = Auth::user()->id;
         
         Product::create($data);
 
@@ -141,6 +144,9 @@ class ProductController extends Controller
         $item = Product::findOrfail($id);
 
         $data['slug'] = Str::slug($request->name);
+
+        
+        $data['users_id'] = Auth::user()->id;
 
         $item->update($data);
        
