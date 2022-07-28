@@ -24,7 +24,10 @@
         <!-- Sidebar -->
         <div class="border-right" id="sidebar-wrapper">
           <div class="sidebar-heading text-center">
-            <img src="/images/admin.png" alt="" class="my-4" style="max-width:150px;" />
+            
+            <a href="{{route('home')}}" class="my-4" 
+              ><img src="/images/admin.png" alt="logo" style="max-width:150px;"
+              /></a>
           </div>
           <div class="list-group list-group-flush">
             <a
@@ -123,7 +126,7 @@
 
                 <ul class="navbar-nav d-block d-lg-none">
                   <li class="nav-item">
-                    <a href="#" class="nav-link"> Hi, Ariq </a>
+                    <a href="#" class="nav-link"> Hi, Admin </a>
                   </li>
                 </ul>
                 <ul class="navbar-nav d-block d-lg-none">

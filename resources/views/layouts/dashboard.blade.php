@@ -108,11 +108,11 @@
                       <img src="/images/shopping-cart-filled.svg" alt="" />
                     </a>
                   </li>
-                </ul>
+                </ul> 
 
                 <ul class="navbar-nav d-block d-lg-none">
                   <li class="nav-item">
-                    <a href="#" class="nav-link"> Hi, Ariq </a>
+                    <a href="#" class="nav-link"> Hi, Admin </a>
                   </li>
                 </ul>
                 <ul class="navbar-nav d-block d-lg-none">

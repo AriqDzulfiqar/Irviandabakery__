@@ -85,7 +85,7 @@ class CheckoutController extends Controller
 
         try {
             Mail::to($transaction->user->email)
-                    ->cc('alisadikinsyahrizal@gmail.com')
+                    ->cc('irviandabakery@gmail.com')
                     ->send(new NotificationEmail($transaction));
             $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
 
@@ -130,7 +130,7 @@ class CheckoutController extends Controller
  
          else if($status == 'settlement') {
             Mail::to($transaction->user->email)
-                    ->cc('alisadikinsyahrizal@gmail.com')
+                    ->cc('irviandabakery@gmail.com')
                     ->send(new NotificationEmail($transaction));
              $transaction->transaction_status = 'SUCCESS';
          }
