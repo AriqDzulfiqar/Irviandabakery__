@@ -16,15 +16,13 @@
               <img src="/images/success.svg" alt="" class="mb-4" />
               <h2>Transaksi di Proses!</h2>
               <p>
-                Silahkan tunggu konfirmasi email dari kami dan kami akan
-                menginformasikan resi secepat mungkin!
+                Terimakasih telah berbelanja di toko Irvianda Bakery! Produk akan kami kirim ke rumah kamu. Mohon ditunggu ya terimakasih!
               </p>
               <div>
-                <a href="/dashboard.html" class="btn btn-success w-50 mt-4"
-                  >My Dashboard</a
-                >
-                <a href="/index.html" class="btn btn-signup w-50 mt-2"
-                  >Kembali Berbelanja</a
+                
+                
+                <a href="{{route('home')}}" class="btn btn-success w-50 mt-2"
+                  >Kembali ke halaman utama</a
                 >
               </div>
             </div>
