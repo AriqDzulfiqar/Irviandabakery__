@@ -22,7 +22,7 @@
               <div class="dashboard-content">
                 <div class="row">
                   <div class="col-12">
-                    <form action="{{route('dashboard-account')}}" method="POST" enctype="multipart/form-data" id="locations">
+                    <form action="{{route('dashboard-redirect','dashboard-account')}}" method="POST" enctype="multipart/form-data" id="locations">
                     @csrf
                       <div class="card">
                         <div class="card-body">

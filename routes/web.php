@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/dashboard/transactions/{id}', 'DashboardTransactionController@update')->name('dashboard-transaction-update');
 
     Route::get('/dashboard/account', 'DashboardAccountController@account')->name('dashboard-account');
-    Route::get('/dashboard/account/{redirect}', 'DashboardAccountController@update')->name('dashboard-redirect');
+    Route::post('/dashboard/account/{redirect}', 'DashboardAccountController@update')->name('dashboard-redirect');
 });
 
 Route::prefix('admin')

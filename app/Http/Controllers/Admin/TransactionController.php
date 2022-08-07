@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\TransactionDetail;
 
 use Yajra\DataTables\Facades\DataTables;
 
@@ -34,9 +35,7 @@ class TransactionController extends Controller
                                     Aksi
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="' .route('transaction.edit', $item->id). '">
-                                Sunting
-                                </a>
+                                
                                 
                                 <form action="'. route('transaction.destroy', $item->id) .'" method="POST">
                                     '.method_field('delete').csrf_field(). '
@@ -134,6 +133,7 @@ class TransactionController extends Controller
     {
         $item = Transaction::findOrFail($id);
         $item->delete();
+        TransactionDetail::where('transactions_id',$id)->delete();
 
          return redirect()->route('transaction.index');
     }

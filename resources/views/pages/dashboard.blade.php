@@ -3,7 +3,7 @@
 
 
 @section('title')
-    Store Dashboard
+    Store Dashboard X
 @endsection
 
 

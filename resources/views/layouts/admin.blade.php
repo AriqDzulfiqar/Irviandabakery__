@@ -131,7 +131,9 @@
                 </ul>
                 <ul class="navbar-nav d-block d-lg-none">
                   <li class="nav-item">
-                    <a href="#" class="nav-link d-inline-block">Cart</a>
+                    <a href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();" class="nav-link">Logout</a>
                   </li>
                 </ul>
               </div>

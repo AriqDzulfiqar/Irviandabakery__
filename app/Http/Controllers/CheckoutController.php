@@ -77,7 +77,7 @@ class CheckoutController extends Controller
             ],
 
             'enabled_payments' => [
-                'gopay', 'shopeepay', 'bank_transfer'
+                'gopay', 'bank_transfer'
             ],
 
             'vtweb' => []

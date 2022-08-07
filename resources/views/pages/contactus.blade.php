@@ -32,7 +32,7 @@
 										</div>
 										<div class="contact-form-box">
 											<h4>Jam Operasional</h4>
-											<p>Senin - Sabtu : 7 Pagi - 6 Sore </p>
+											<p>Senin - Sabtu : 07.00 - 18.00 </p>
 										</div>
 										<div class="contact-form-box">
 											<h4>Kontak</h4>
@@ -41,7 +41,7 @@
 											Facebook : Irvianda Devi</p>
 										</div>
 										<div class="contact-form-box">
-											<h4>Tambahan</h4>
+											<h4>Informasi Produk</h4>
 											<p>Informasi Halal : ID 15110000036811120<br>Informasi PIRT : 2061504020370-25</p>
 										</div>
 									</div>
