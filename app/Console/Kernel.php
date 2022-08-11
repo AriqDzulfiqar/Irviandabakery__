@@ -25,8 +25,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        // $schedule->command('transaction:failed')->timezone('Asia/Jakarta')->everyMinute();
-        $schedule->command('transaction:failed')->timezone('Asia/Jakarta')->hourly();
+        $schedule->command('transaction:failed')->timezone('Asia/Jakarta')->everyMinute();
+        // $schedule->command('transaction:failed')->timezone('Asia/Jakarta')->hourly();
     }
 
     /**
