@@ -116,7 +116,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="detail_address">Detail Alamat</label>
+                  <label for="detail_address">Detail alamat (Kelurahan & Kecamatan)</label>
                   <input
                     type="text"
                     class="form-control"
@@ -210,7 +210,7 @@
                     <label v-if="cost_out"> biaya pengiriman</label>
                     <select   class="form-control" v-model="ongkir" required @change="GetOngkir()" v-if="cost_out">
                       <option value="" v-if="costs.length == 0">Tidak tesedia pengiriman</option>
-                      <option :value="value.cost[0].value" v-for="value in costs" v-else >@{{value.cost[0].value + ' | ' + value.service}}</option>
+                      <option :value="value.cost[0].value" v-for="value in costs" v-else >@{{value.cost[0].value + ' | ' + value.service + ' (JNE)'}}</option>
                       
                       </select>
                       <span v-if="cost_out">*Note : Kalo pake kurir Expedisi biasanya jadi berantakan kuenya </span>

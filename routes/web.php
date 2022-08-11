@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/menu', 'MenuController@index')->name('menu');
@@ -34,7 +35,7 @@ Route::get('/register/success', 'Auth\RegisterController@success')->name('regist
 
 
 
-Route::group(['middleware' => ['auth']], function(){
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/cart', 'CartController@index')->name('cart');
     Route::delete('/cart/{id}', 'CartController@delete')->name('cart-delete');
 
@@ -57,16 +58,15 @@ Route::group(['middleware' => ['auth']], function(){
 
 Route::prefix('admin')
     ->namespace('Admin')
-    ->middleware(['auth','admin'])
-    ->group(function() {
+    ->middleware(['auth', 'admin'])
+    ->group(function () {
         Route::get('/', 'DashboardController@index')->name('admin-dashboard');
         Route::resource('category', 'CategoryController');
         Route::resource('user', 'UserController');
         Route::resource('product', 'ProductController');
         Route::resource('product-gallery', 'ProductGalleryController');
         Route::resource('transaction', 'TransactionController');
+        Route::get('report-product', 'DashboardController@reportProduct')->name('report-product.index');
     });
 
 Auth::routes();
-
-
