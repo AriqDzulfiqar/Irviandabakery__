@@ -89,8 +89,10 @@
             <div class="col-12">
               <hr />
             </div>
-            <div class="col-12">
-              <h2 class="mb-4">Detail Pengiriman</h2>
+            <div class="col-12 mb-4">
+              <h2 class="">Detail Pengiriman</h2>
+              <span >*Note : untuk sementara  hanya melayani daerah provinsi  jambi dan sumatra selatan saja</span>
+
             </div>
           </div>
           <form action="{{route('checkout')}}" enctype="multipart/form-data" method="POST" id="locations">
@@ -137,8 +139,8 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="regencies_id">Kota</label>
-                  <select name="regencies_id" id="regencies_id" class="form-control" v-model="regencies_id" v-if="regencies">
-                    <option v-for="regency in regencies" :value="regency.id">@{{regency.name }}</option>
+                  <select name="regencies_id" id="regencies_id" required @change="CekOngkir()" class="form-control" v-model="regencies_id" v-if="regencies">
+                    <option v-for="regency in regencies" :value="regency.city_id">@{{regency.name }}</option>
                   </select>
                   <select v-else class="form-control"></select>
                 </div>
@@ -196,25 +198,34 @@
             <br>
 
             
-              <div class="col-md-6">
+              <div class="col-md-6" >
                 <div class="form-group">
-                  <label>Pilih jarak dan biaya pengiriman</label>
-                    <select   class="form-control" v-model="penerima" required @change="GetOngkir()">
+                  <label v-if="cost_in">Pilih jarak dan biaya pengiriman</label>
+                    <select   class="form-control" v-model="penerima" required @change="GetOngkir()" v-if="cost_in">
                     <option value="1">Dalam Kelurahan Teratai - Gratis</option>
                     <option value="2">Dalam Wilayah Kecamatan Muara Bulian - Rp 10.000</option>
                     <option value="3">Diluar Kecamatan Bulian dan dalam Kabupaten Batanghari - Rp 12.500</option>
                     </select>
-                    <br>
-                    <label for="" v-if="penerima != 4">@{{ ongkir == 0 ? "Free Ongkir" : ongkir}}</label>
+
+                    <label v-if="cost_out"> biaya pengiriman</label>
+                    <select   class="form-control" v-model="ongkir" required @change="GetOngkir()" v-if="cost_out">
+                      <option value="" v-if="costs.length == 0">Tidak tesedia pengiriman</option>
+                      <option :value="value.cost[0].value" v-for="value in costs" v-else >@{{value.cost[0].value + ' | ' + value.service}}</option>
+                      
+                      </select>
+                      <span v-if="cost_out">*Note : Kalo pake kurir Expedisi biasanya jadi berantakan kuenya </span>
+                      <br>
+
+                    <label for="" v-if="cost_in">@{{ ongkir == 0 ? "Free Ongkir" : ongkir}}</label>
                 </div>
               </div>
-              <template v-if="penerima == 4 ">
+              {{-- <template v-if="penerima == 4 ">
                 <div class="col-md-6 mb-3">
                   <div class="product-title">Masukan Ongkos Kirim</div>
                   <input type="text" class="form-control" v-on:keyup="InputOngkir" min="0" name="ongkir" v-model="ongkir">
                 </div>
                
-              </template>
+              </template> --}}
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Tambahkan catatan pembelian</label>
@@ -263,6 +274,9 @@
        
         data(){
           return{
+          cost_in:false, //didalam masih statis
+          cost_out:false, // diluar menggunakan raja ongkir
+          costs:[], //menampung data ongkir
           penerima: null,
           ongkir: null,
           provinces: null,
@@ -274,36 +288,78 @@
         },
         methods: {
           GetOngkir(){
+            
+            
             var self = this;
-             if(this.penerima == 1){
-              this.ongkir = 0;
-            }else if(this.penerima == 2){
-              this.ongkir = 10000;
-            }else if(this.penerima == 3){
-              this.ongkir = 12500;
-            }
-            const price = document.getElementById('price').value ;
-            const total = parseInt(price) + parseInt(this.ongkir)
-            document.getElementById('totalPembayaran').innerHTML = `Rp ${total}`;
-            document.getElementById('total_price').value = total;
+            // Jika kota Batang Hari
+             if(self.regencies_id == 50){
+                if(this.penerima == 1){
+                  this.ongkir = 0;
+                }else if(this.penerima == 2){
+                  this.ongkir = 10000;
+                }else if(this.penerima == 3){
+                  this.ongkir = 12500;
+                }
+                const price = document.getElementById('price').value ;
+                const total = parseInt(price) + parseInt(this.ongkir)
+                document.getElementById('totalPembayaran').innerHTML = `Rp ${total}`;
+                document.getElementById('total_price').value = total;
+
+             }else{
+                const price = document.getElementById('price').value ;
+                const total = parseInt(price) + parseInt(this.ongkir)
+                document.getElementById('totalPembayaran').innerHTML = `Rp ${total}`;
+                document.getElementById('total_price').value = total;
+             }
             
             // console.log(self.city_id)
           },
-          InputOngkir(){
+          CekOngkir(){
+            var self = this;
             
-            const price = document.getElementById('price').value ;
-
-            if(this.ongkir == ""){
-              document.getElementById('totalPembayaran').innerHTML = `Rp ${parseInt(price)}`;
+            // Jika kota Batang Hari
+            if(self.regencies_id == 50){
+              self.cost_in = true;
+              self.cost_out = false;
+              // Jika kota lain
             }else{
-              const total = parseInt(price) + parseInt(this.ongkir)
+              // self.cost_out = true;
+              self.cost_in = false;
 
-            document.getElementById('totalPembayaran').innerHTML = `Rp ${parseInt(price) + parseInt(this.ongkir)}`;
-            document.getElementById('total_price').value = total;
+              // Hit cek ongkir
+             axios.post("{{ route('api-checkOngkir') }}", {
+              regencies_id: self.regencies_id, // <-- ID kota tujuan
+              })
+                .then((response) => {
+                
+                  // set state cost menjadi true, untuk menampilkan pilihan cost pengiriman
+                  self.cost_out = true;
+                  //assign state costs dengan hasil response
+                  self.costs = response.data.data[0].costs;
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
 
             }
+            
             // console.log(self.city_id)
           },
+          // InputOngkir(){
+            
+          //   const price = document.getElementById('price').value ;
+
+          //   if(this.ongkir == ""){
+          //     document.getElementById('totalPembayaran').innerHTML = `Rp ${parseInt(price)}`;
+          //   }else{
+          //     const total = parseInt(price) + parseInt(this.ongkir)
+
+          //   document.getElementById('totalPembayaran').innerHTML = `Rp ${parseInt(price) + parseInt(this.ongkir)}`;
+          //   document.getElementById('total_price').value = total;
+
+          //   }
+          //   // console.log(self.city_id)
+          // },
           getProvincesData() {
             var self = this;
             axios.get('{{ route('api-provinces') }}')
