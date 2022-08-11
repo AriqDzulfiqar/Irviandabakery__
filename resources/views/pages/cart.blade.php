@@ -216,7 +216,7 @@
                       <span v-if="cost_out">*Note : Kalo pake kurir Expedisi biasanya jadi berantakan kuenya </span>
                       <br>
 
-                    <label for="" v-if="cost_in">@{{ ongkir == 0 ? "Free Ongkir" : ongkir}}</label>
+                    <label for="" v-if="cost_in">@{{ ongkir_in == 0 ? "Free Ongkir" : ongkir_in}}</label>
                 </div>
               </div>
               {{-- <template v-if="penerima == 4 ">
@@ -278,6 +278,7 @@
           cost_out:false, // diluar menggunakan raja ongkir
           costs:[], //menampung data ongkir
           penerima: null,
+          ongkir_in: null,
           ongkir: null,
           provinces: null,
           regencies: null,
@@ -294,14 +295,14 @@
             // Jika kota Batang Hari
              if(self.regencies_id == 50){
                 if(this.penerima == 1){
-                  this.ongkir = 0;
+                  this.ongkir_in = 0;
                 }else if(this.penerima == 2){
-                  this.ongkir = 10000;
+                  this.ongkir_in = 10000;
                 }else if(this.penerima == 3){
-                  this.ongkir = 12500;
+                  this.ongkir_in = 12500;
                 }
                 const price = document.getElementById('price').value ;
-                const total = parseInt(price) + parseInt(this.ongkir)
+                const total = parseInt(price) + parseInt(this.ongkir_in)
                 document.getElementById('totalPembayaran').innerHTML = `Rp ${total}`;
                 document.getElementById('total_price').value = total;
 
