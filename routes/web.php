@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/log-viewer', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/menu', 'MenuController@index')->name('menu');
