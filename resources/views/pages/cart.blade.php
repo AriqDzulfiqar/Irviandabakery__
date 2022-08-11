@@ -108,6 +108,7 @@
                     id="address"
                     name="address"
                     value=""
+                    required
                   />
                 </div>
               </div>
@@ -120,6 +121,7 @@
                     id="detail_address"
                     name="detail_address"
                     value=""
+                    required
                   />
                 </div>
               </div>
@@ -150,6 +152,7 @@
                     id="zip_code"
                     name="zip_code"
                     value=""
+                    required
                   />
                 </div>
               </div>
@@ -161,7 +164,8 @@
                     class="form-control"
                     id="country"
                     name="country"
-                    value=""
+                    value="Indonesia"
+                    readonly
                   />
                 </div>
               </div>
@@ -174,6 +178,7 @@
                     id="phone_number"
                     name="phone_number"
                     value=""
+                    required
                   />
                 </div>
               </div>
@@ -198,7 +203,6 @@
                     <option value="1">Dalam Kelurahan Teratai - Gratis</option>
                     <option value="2">Dalam Wilayah Kecamatan Muara Bulian - Rp 10.000</option>
                     <option value="3">Diluar Kecamatan Bulian dan dalam Kabupaten Batanghari - Rp 12.500</option>
-                    <option value="4">Dan diluar itu silahkan hubungi admin terlebih dahulu - custom</option>
                     </select>
                     <br>
                     <label for="" v-if="penerima != 4">@{{ ongkir == 0 ? "Free Ongkir" : ongkir}}</label>
@@ -277,8 +281,6 @@
               this.ongkir = 10000;
             }else if(this.penerima == 3){
               this.ongkir = 12500;
-            }else if(this.penerima == 4){
-              this.ongkir = 0;
             }
             const price = document.getElementById('price').value ;
             const total = parseInt(price) + parseInt(this.ongkir)
@@ -306,6 +308,7 @@
             var self = this;
             axios.get('{{ route('api-provinces') }}')
               .then(function (response) {
+                console.log(response.data)
                   self.provinces = response.data;
               })
           },
