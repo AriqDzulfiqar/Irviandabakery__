@@ -100,6 +100,7 @@
             <input type="hidden"  id="price" value="{{ $totalPrice }}">
             <input type="hidden" name="total_price" id="total_price"  value="{{ $totalPrice }}">
             <input type="hidden" name="ongkir"  v-model="ongkir">
+            <input type="hidden" name="ongkir"  v-model="ongkir_in">
             <div class="row mb-2" data-aos="fade-up" data-aos-delay="200" >
               <div class="col-md-6">
                 <div class="form-group">
