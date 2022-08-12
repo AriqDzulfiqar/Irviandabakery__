@@ -140,7 +140,7 @@
                           <div class="card-body">
                             <div class="row">
                               <div class="col-md-1">
-                                <img src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}" class="w-20">
+                                <img src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}" class="w-75">
                                 
                               </div>
                               <div class="col-md-1">{{  $transaction->price ?? ''  }}</div>
