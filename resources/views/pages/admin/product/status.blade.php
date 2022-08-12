@@ -153,7 +153,7 @@
                                 
                               </div>
                               <div class="col-md-2 text-center">{{  $transaction->product->price ?? ''  }}</div>
-                              <div class="col-md-3 text-center">{{  $transaction->sum ?? ''}}</div>
+                              <div class="col-md-3 text-center">{{  $transaction->quantity ?? ''}}</div>
                               <div class="col-md-2 text-center">{{  $transaction->product->name ?? ''}}</div>
                               <div class="col-md-3 text-center">{{  $transaction->transaction->user->name ?? ''}}</div>
                               
