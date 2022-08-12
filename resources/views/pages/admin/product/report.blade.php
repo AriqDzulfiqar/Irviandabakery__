@@ -23,7 +23,7 @@
               </div>
               <div class="dashboard-content">
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col">
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title">Hari ini </div>
@@ -31,7 +31,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col">
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title"> Bulan {{ date('F') }}</div>
@@ -39,7 +39,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col">
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title">Tahun {{ date('Y') }}</div>
@@ -47,8 +47,16 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
-                    <div class="card mb-2">
+                  <div class="col">
+                    <div class="card mb-2" onclick="location.href='{{route('status-product.index')}}?status=PENDING';">
+                      <div class="card-body">
+                        <div class="dashboard-card-title">PENDING</div>
+                        <div class="dashboard-card-subtitle">{{ $pending }}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card mb-2" onclick="location.href='{{route('status-product.index')}}?status=FAILED';">
                       <div class="card-body">
                         <div class="dashboard-card-title">FAILED</div>
                         <div class="dashboard-card-subtitle">{{ $failed }}</div>
@@ -119,14 +127,14 @@
                     @endphp
                       <div class="card-body">
                         <div class="row">
-                          <div class="col-md-1">
+                          <div class="col-md-1 text-center">
                           </div>
-                          <div class="col-md-2">
+                          <div class="col-md-1 text-center">
                             photo
                           </div>
-                          <div class="col-md-2">Price</div>
-                          <div class="col-md-3">Quantity</div>
-                          <div class="col-md-4">Product</div>
+                          <div class="col-md-3 text-center">Price</div>
+                          <div class="col-md-3 text-center">Quantity</div>
+                          <div class="col-md-4 text-center">Product</div>
                          
                         </div>
                       </div>
@@ -137,15 +145,15 @@
                         >
                           <div class="card-body">
                             <div class="row">
-                              <div class="col-md-1">{{  $loop->iteration  }}</div>
+                              <div class="col-md-1 text-center">{{  $loop->iteration  }}</div>
 
-                              <div class="col-md-2">
+                              <div class="col-md-1 text-center">
                                 <img src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}" class="w-50">
                                 
                               </div>
-                              <div class="col-md-2">{{  $transaction->product->price ?? ''  }}</div>
-                              <div class="col-md-3">{{  $transaction->sum ?? ''}}</div>
-                              <div class="col-md-4">{{  $transaction->product->name ?? ''}}</div>
+                              <div class="col-md-3 text-center">{{  $transaction->product->price ?? ''  }}</div>
+                              <div class="col-md-3 text-center">{{  $transaction->sum ?? ''}}</div>
+                              <div class="col-md-4 text-center">{{  $transaction->product->name ?? ''}}</div>
                               
                             </div>
                           </div>

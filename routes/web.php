@@ -68,6 +68,7 @@ Route::prefix('admin')
         Route::resource('product-gallery', 'ProductGalleryController');
         Route::resource('transaction', 'TransactionController');
         Route::get('report-product', 'DashboardController@reportProduct')->name('report-product.index');
+        Route::get('status-product', 'DashboardController@statusProduct')->name('status-product.index');
     });
 
 Auth::routes();

@@ -23,42 +23,50 @@
               </div>
               <div class="dashboard-content">
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col">
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title">Hari ini </div>
-                        <div class="dashboard-card-subtitle">Rp{{ $days }}</div>
+                        <div class="dashboard-card-subtitle">{{ $days }}</div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col">
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title"> Bulan {{ date('F') }}</div>
-                        <div class="dashboard-card-subtitle"> Rp{{ $month }}</div>
+                        <div class="dashboard-card-subtitle"> {{ $month }}</div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col">
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title">Tahun {{ date('Y') }}</div>
-                        <div class="dashboard-card-subtitle">Rp{{ $years }}</div>
+                        <div class="dashboard-card-subtitle">{{ $years }}</div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
-                    <div class="card mb-2">
+                  <div class="col">
+                    <div class="card mb-2" onclick="location.href='{{route('status-product.index')}}?status=PENDING';">
                       <div class="card-body">
-                        <div class="dashboard-card-title">Failed</div>
-                        <div class="dashboard-card-subtitle">Rp{{ $failed }}</div>
+                        <div class="dashboard-card-title">PENDING</div>
+                        <div class="dashboard-card-subtitle">{{ $pending }}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card mb-2"  onclick="location.href='{{route('status-product.index')}}?status=FAILED';">
+                      <div class="card-body">
+                        <div class="dashboard-card-title">FAILED</div>
+                        <div class="dashboard-card-subtitle">{{ $failed }}</div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row mt-3">
                   <div class="col-12 mt-2">
-                    <form action="{{ route('admin-dashboard') }}" method="GET">
+                    {{-- <form action="{{ route('report-product.index') }}" method="GET">
                       @csrf
                       <div class="row">
                         <div class="col-md-6">
@@ -112,68 +120,63 @@
   
                         </div>
                       </div>
-                    </form>
-                    <h5 class="mb-3">Daftar Transaksi</h5>
+                    </form> --}}
+                    <h5 class="mb-3">Daftar Produk {{ request()->status }}</h5>
                     @php
                          $globalTransaction = 0;
                     @endphp
                       <div class="card-body">
                         <div class="row">
-                          <div class="col-md-1">
+                          <div class="col-md-1 text-center">
+                          </div>
+                          <div class="col-md-1 text-center">
                             photo
                           </div>
-                          <div class="col-md-1">Price</div>
-                          <div class="col-md-1">Quantity</div>
-                          <div class="col-md-3">Product</div>
-                          <div class="col-md-3">Pembeli</div>
-                          <div class="col-md-2">Tanggal</div>
-                          <div class="col-md-1 d-none d-md-block">
-                           
-                          </div>
+                          <div class="col-md-2 text-center">Price</div>
+                          <div class="col-md-3 text-center">Quantity</div>
+                          <div class="col-md-2 text-center">Product</div>
+                          <div class="col-md-3 text-center">Pembeli</div>
+                         
                         </div>
                       </div>
                     @forelse ($transaction_data as $transaction)
                         <a
-                          href="{{route('dashboard-transaction-details',$transaction->id)}}"
+                          href="javascript:void(0)"
                           class="card card-list d-block"
                         >
                           <div class="card-body">
                             <div class="row">
+                              <div class="col-md-1 text-center">{{  $loop->iteration  }}</div>
+
                               <div class="col-md-1">
-                                <img src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}" class="w-75">
+                                <img src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}" class="w-50">
                                 
                               </div>
-                              <div class="col-md-1">{{  $transaction->price ?? ''  }}</div>
-                              <div class="col-md-1">{{  $transaction->quantity ?? ''}}</div>
-                              <div class="col-md-3">{{  $transaction->product->name ?? ''}}</div>
-                              <div class="col-md-3">{{  $transaction->transaction->user->name ?? ''}}</div>
-                              <div class="col-md-2">{{  $transaction->created_at->format('d F Y') ?? ''}}</div>
-                              <div class="col-md-1 d-none d-md-block">
-                                <img
-                                  src="/images/dashboard-arrow-right.svg"
-                                  alt=""
-                                />
-                              </div>
+                              <div class="col-md-2 text-center">{{  $transaction->product->price ?? ''  }}</div>
+                              <div class="col-md-3 text-center">{{  $transaction->sum ?? ''}}</div>
+                              <div class="col-md-2 text-center">{{  $transaction->product->name ?? ''}}</div>
+                              <div class="col-md-3 text-center">{{  $transaction->transaction->user->name ?? ''}}</div>
+                              
                             </div>
                           </div>
                         </a>
                         @php
                        
-                          $globalTransaction += ( $transaction->price * $transaction->quantity) + $transaction->transaction->shipping_price;
+                          $globalTransaction += $transaction->sum;
                         @endphp
                     @empty
                     <div class="card-body">
                       <div class="row justify-content-center">
-                        <div class="col-md-4">
-                          <h4 class="text-center">Tidak Ada Transaksi</h4>
-                        </div>
+                       <div class="col-md-4">
+                        <h4 class="text-center">Tidak Ada Produk</h4>
+                       </div>
                       </div>
                     </div>
                     @endforelse  
                     @if ($transaction_count > 0)
                     @if (request()->start && request()->end || request()->bulan || request()->tahun)
                         
-                    <h4 class="ml-3">Total :  Rp{{ $globalTransaction }}</h4>
+                    <h4 class="ml-3">Total :  {{ $globalTransaction }}</h4>
                     @endif
                         
                     @endif
