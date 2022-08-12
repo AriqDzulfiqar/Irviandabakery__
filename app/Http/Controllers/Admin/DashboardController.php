@@ -117,20 +117,20 @@ class DashboardController extends Controller
         $transactions = TransactionDetail::with(['transaction.user', 'product.galleries'])
             ->wherehas('transaction', function ($q) {
                 $q->where('transaction_status', request()->status);
-            })
-            ->when(request()->start, function ($query) {
-                $query->whereDate('created_at', '>=', request()->start);
-            })->when(request()->end, function ($query) {
-                $query->whereDate('created_at', '<=', request()->end);
-            })
-            ->when(request()->bulan, function ($query) {
-                $query->whereMonth('created_at', request()->bulan);
-            })->when(request()->tahun, function ($query) {
-                $query->whereYear('created_at', request()->tahun);
-            })
-            // ->groupBy('products_id')
-            // ->orderByRaw('SUM(quantity) desc')
-            ->selectRaw('sum(quantity) as sum, products_id,transactions_id,price');
+            })->get();
+        // ->when(request()->start, function ($query) {
+        //     $query->whereDate('created_at', '>=', request()->start);
+        // })->when(request()->end, function ($query) {
+        //     $query->whereDate('created_at', '<=', request()->end);
+        // })
+        // ->when(request()->bulan, function ($query) {
+        //     $query->whereMonth('created_at', request()->bulan);
+        // })->when(request()->tahun, function ($query) {
+        //     $query->whereYear('created_at', request()->tahun);
+        // })
+        // ->groupBy('products_id')
+        // ->orderByRaw('SUM(quantity) desc')
+        // ->selectRaw('sum(quantity) as sum, products_id,transactions_id,price');
 
 
 
