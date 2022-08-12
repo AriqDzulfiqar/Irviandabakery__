@@ -121,12 +121,12 @@
                         <div class="row">
                           <div class="col-md-1">
                           </div>
-                          <div class="col-md-3">
+                          <div class="col-md-1">
                             photo
                           </div>
-                          <div class="col-md-2">Price</div>
+                          <div class="col-md-3">Price</div>
                           <div class="col-md-3">Quantity</div>
-                          <div class="col-md-3">Product</div>
+                          <div class="col-md-4">Product</div>
                          
                         </div>
                       </div>
