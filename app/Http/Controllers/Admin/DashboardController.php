@@ -128,8 +128,8 @@ class DashboardController extends Controller
             })->when(request()->tahun, function ($query) {
                 $query->whereYear('created_at', request()->tahun);
             })
-            ->groupBy('products_id')
-            ->orderByRaw('SUM(quantity) desc')
+            // ->groupBy('products_id')
+            // ->orderByRaw('SUM(quantity) desc')
             ->selectRaw('sum(quantity) as sum, products_id,transactions_id,price');
 
 
