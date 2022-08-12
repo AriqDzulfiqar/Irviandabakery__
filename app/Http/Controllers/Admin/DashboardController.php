@@ -117,7 +117,7 @@ class DashboardController extends Controller
         $transactions = TransactionDetail::with(['transaction.user', 'product.galleries'])
             ->wherehas('transaction', function ($q) {
                 $q->where('transaction_status', request()->status);
-            })->get();
+            })->latest();
         // ->when(request()->start, function ($query) {
         //     $query->whereDate('created_at', '>=', request()->start);
         // })->when(request()->end, function ($query) {
