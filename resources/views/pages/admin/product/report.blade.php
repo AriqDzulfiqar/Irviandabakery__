@@ -121,10 +121,10 @@
                         <div class="row">
                           <div class="col-md-1">
                           </div>
-                          <div class="col-md-1">
+                          <div class="col-md-2">
                             photo
                           </div>
-                          <div class="col-md-3">Price</div>
+                          <div class="col-md-2">Price</div>
                           <div class="col-md-3">Quantity</div>
                           <div class="col-md-4">Product</div>
                          
@@ -139,13 +139,13 @@
                             <div class="row">
                               <div class="col-md-1">{{  $loop->iteration  }}</div>
 
-                              <div class="col-md-3">
-                                <img src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}" class="w-75">
+                              <div class="col-md-2">
+                                <img src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}" class="w-50">
                                 
                               </div>
                               <div class="col-md-2">{{  $transaction->product->price ?? ''  }}</div>
                               <div class="col-md-3">{{  $transaction->sum ?? ''}}</div>
-                              <div class="col-md-3">{{  $transaction->product->name ?? ''}}</div>
+                              <div class="col-md-4">{{  $transaction->product->name ?? ''}}</div>
                               
                             </div>
                           </div>
