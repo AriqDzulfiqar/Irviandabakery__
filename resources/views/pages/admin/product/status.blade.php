@@ -121,7 +121,7 @@
                         </div>
                       </div>
                     </form> --}}
-                    <h5 class="mb-3">Daftar Produk {{ request()->status }}</h5>
+                    <h5 class="mb-3">Daftar Transaksi {{ request()->status }}</h5>
                     @php
                          $globalTransaction = 0;
                     @endphp
