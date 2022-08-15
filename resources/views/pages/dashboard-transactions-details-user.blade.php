@@ -88,7 +88,7 @@
                                 </div> 
                                 <div class="col-12 col-md-6">
                                   <div class="product-title">Kota</div>
-                                  <div class="product-subtitle">{{App\City::find($transaction->transaction->user->regencies_id)->name ?? null}}</div>
+                                  <div class="product-subtitle">{{App\City::where('city_id',$transaction->transaction->user->regencies_id)->first()->name ?? null}}</div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                   <div class="product-title">Kode Pos</div>
