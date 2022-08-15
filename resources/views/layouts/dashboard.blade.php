@@ -29,12 +29,18 @@
           </div>
           <div class="list-group list-group-flush">
             
-            
+          
             <a
               href="{{route('dashboard-account')}}"
               class="list-group-item list-group-item-action {{ (request()->is('dashboard/account*')) ? 'active' : ''}}"
             >
               Akun Saya
+            </a>
+            <a
+              href="{{route('dashboard-transaction')}}"
+              class="list-group-item list-group-item-action {{ (request()->is('dashboard/transaction*')) ? 'active' : ''}}"
+            >
+              Transaksi
             </a>
             <a
               href="{{ route('logout') }}"
