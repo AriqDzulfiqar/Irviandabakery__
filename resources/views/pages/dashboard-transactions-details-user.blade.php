@@ -1,5 +1,5 @@
 
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 
 @section('title')
@@ -101,28 +101,22 @@
                                 <div class="col-12 col-md-3">
                                   <div class="product-title">Status Pengiriman</div>
                                   <select name="shipping_status" id="status" class="form-control" v-model="status">
-                                    <option value="PENDING">Menunggu Pembayaran</option>
-                                    <option value="SHIPPING">Pengiriman</option>
-                                    <option value="SUCCESS">Sukses</option>
+                                    @if ($transaction->shipping_status == 'PENDING')
+                                      <option value="PENDING" selected>Menunggu Pembayaran</option>
+                                    @elseif ($transaction->shipping_status == 'SHIPPING')
+                                      <option value="SHIPPING" selected>Pengiriman</option>
+                                    @elseif ($transaction->shipping_status == 'SUCCESS')
+                                    <option value="SUCCESS" selected>Success</option>
+                                      @else
+                                      <option value="">{{ $transaction->shipping_status }}</option>
+                                    @endif
                                   </select>
                                 </div>
-                                <template v-if="status == 'SHIPPING' ">
-                                  <div class="col-md-3">
-                                    <div class="product-title">Input Resi</div>
-                                    <input type="text" class="form-control" name="resi" v-model="resi">
-                                  </div>
-                                  <div class="col-md-2">
-                                    <button type="submit" class="btn btn-success btn-block mt-4">Update Resi</button>
-                                  </div>
-                                </template>
+                              
                               </div>
                             </div>
                           </div>
-                          <div class="row mt-4">
-                            <div class="col-12 text-right">
-                              <button type="submit" class="btn btn-success btn-lg mt-4">Save Now</button>
-                            </div>
-                          </div>
+                          
                           </form>
                         </div>
                       </div>

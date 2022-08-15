@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardTransactionController extends Controller
 {
-    
+
 
     /**
      * Show the application dashboard.
@@ -19,20 +19,20 @@ class DashboardTransactionController extends Controller
      */
     public function index()
     {
-        $buyTransactions = TransactionDetail::with(['transaction.user','product.galleries'])
-                            ->whereHas('transaction',function($transaction){
-                                $transaction->where('users_id',Auth::user()->id);
-                            })->get();
+        $buyTransactions = TransactionDetail::with(['transaction.user', 'product.galleries'])
+            ->whereHas('transaction', function ($transaction) {
+                $transaction->where('users_id', Auth::user()->id);
+            })->get();
 
-        return view('pages.dashboard-transactions',[
+        return view('pages.dashboard-transactions', [
             'buyTransactions' => $buyTransactions
         ]);
     }
     public function details(Request $request, $id)
     {
-        $transaction = TransactionDetail::with(['transaction.user','product.galleries'])
-                            ->findOrFail($id);
-        return view('pages.dashboard-transactions-details',[
+        $transaction = TransactionDetail::with(['transaction.user', 'product.galleries'])
+            ->findOrFail($id);
+        return view('pages.dashboard-transactions-details-user', [
             'transaction' => $transaction
         ]);
     }
@@ -43,7 +43,7 @@ class DashboardTransactionController extends Controller
 
         $item = TransactionDetail::findOrFail($id);
 
-        $item -> update($data);
+        $item->update($data);
 
         return redirect()->route('dashboard-transaction-details', $id);
     }

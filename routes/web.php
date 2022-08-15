@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard/product/{id}', 'DashboardProductController@update')->name('dashboard-product-update');
 
     Route::get('/dashboard/transactions', 'DashboardTransactionController@index')->name('dashboard-transaction');
-    Route::get('/dashboard/transactions/{id}', 'DashboardTransactionController@details')->name('dashboard-transaction-details');
+    Route::get('/dashboard/transactions/{id}', 'DashboardTransactionController@details')->name('dashboard-transaction-details-user');
     Route::post('/dashboard/transactions/{id}', 'DashboardTransactionController@update')->name('dashboard-transaction-update');
 
     Route::get('/dashboard/account', 'DashboardAccountController@account')->name('dashboard-account');
