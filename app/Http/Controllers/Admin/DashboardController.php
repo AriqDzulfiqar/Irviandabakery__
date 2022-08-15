@@ -144,4 +144,13 @@ class DashboardController extends Controller
             'transaction_data' => $transactions->get(),
         ]);
     }
+
+    public function Transactiondetails($id)
+    {
+        $transaction = TransactionDetail::with(['transaction.user', 'product.galleries'])
+            ->findOrFail($id);
+        return view('pages.dashboard-transactions-details', [
+            'transaction' => $transaction
+        ]);
+    }
 }
